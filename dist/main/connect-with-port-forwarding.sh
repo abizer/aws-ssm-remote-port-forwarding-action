@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euxo pipefail
 
 # Parse command-line arguments
 while getopts ":t:h:p:l:" opt; do
@@ -20,16 +22,16 @@ if [ -z "${target}" ] || [ -z "${host}" ] || [ -z "${port}" ] || [ -z "${local_p
   exit 1
 fi
 
-# Check if the target instance actually exists
-target_exists=$(aws ec2 describe-instances \
-  --instance-ids "${target}" \
-  --query "Reservations[*].Instances[*].InstanceId" \
-  --output text 2>/dev/null)
+# # Check if the target instance actually exists
+# target_exists=$(aws ec2 describe-instances \
+#   --instance-ids "${target}" \
+#   --query "Reservations[*].Instances[*].InstanceId" \
+#   --output text 2>/dev/null)
 
-if [ -z "${target_exists}" ]; then
-  echo "Target instance '${target}' does not exist or is not accessible." >&2
-  exit 1
-fi
+# if [ -z "${target_exists}" ]; then
+#   echo "Target instance '${target}' does not exist or is not accessible." >&2
+#   exit 1
+# fi
 
 OUTPUT_LOG="output.txt"
 ERROR_LOG="error.txt"
