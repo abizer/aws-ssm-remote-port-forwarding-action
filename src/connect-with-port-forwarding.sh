@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -euxo pipefail
 
 # Parse command-line arguments
 while getopts ":t:h:p:l:" opt; do
