@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 # Parse command-line arguments
 while getopts ":t:h:p:l:" opt; do
@@ -60,7 +60,7 @@ echo "Attempting to establish SSM session..."
 until grep -q "${session_id_str}" "$OUTPUT_LOG" || [ "${attempt_counter}" -ge "${max_attempts}" ]; do
   attempt_counter=$((attempt_counter + 1))
   echo "Waiting for the session to be established (${attempt_counter}/${max_attempts})..."
-  sleep 1
+  sleep 3
 done
 
 
